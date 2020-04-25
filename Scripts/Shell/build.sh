@@ -1,11 +1,9 @@
 cd ../../Java
 rm -r WorkingDirectory/*
-cd ../Client
-./build.sh &
-cd ../Servers/MatchmakingServer
-./build.sh &
-cd ../GameServer
-./build.sh &
-cd ../../WorkingDirectory
-cd ../../Scripts/Batch
+
+Client/build.sh &
+Servers/MatchmakingServer/build.sh &
+Servers/GameServer/build.sh &
 wait
+
+cd ../Scripts/Shell
