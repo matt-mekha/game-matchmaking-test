@@ -1,3 +1,5 @@
 cd ../../Java/WorkingDirectory
-start "" java -jar Client.jar
-exit
+for /l %%N in (1 1 %1) do (
+    start "" java -jar Client.jar
+)
+cd ../../Scripts/Batch

@@ -1,3 +1,5 @@
 cd ../../Java/WorkingDirectory
-java -jar Client.jar &
-exit
+for i in `seq $1`; do
+    java -jar Client.jar &
+done
+cd ../../Scripts/Batch
