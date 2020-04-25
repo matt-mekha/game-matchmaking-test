@@ -6,11 +6,11 @@ import com.matchmaking.client.Constants;
 import com.matchmaking.client.Game;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main (String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Constants.SCENE_WIDTH;
 		config.height = Constants.SCENE_HEIGHT;
 		config.resizable = false;
-		new LwjglApplication(new Game(), config);
+		new LwjglApplication(new Game(args), config);
 	}
 }

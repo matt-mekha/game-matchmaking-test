@@ -12,8 +12,8 @@ import com.matchmaking.client.RequestProtos.*;
 
 public class ClientSocket {
 
-    private final static String MATCHMAKING_SERVER_IP = "127.0.0.1";
     private final static int MATCHMAKING_SERVER_PORT = 3000;
+    private final String matchmakingAddressName;
 
     private final static int SOCKET_TIMEOUT = 5000;
     private final static int QUEUE_TIMEOUT = 30000;
@@ -28,8 +28,9 @@ public class ClientSocket {
 
     private Status status = Status.CONNECTING;
 
-    public ClientSocket(Game game) {
+    public ClientSocket(Game game, String matchmakingAddressName) {
         this.game = game;
+        this.matchmakingAddressName = matchmakingAddressName;
         try {
             socket = new DatagramSocket();
             socket.setSoTimeout(SOCKET_TIMEOUT);
@@ -118,7 +119,7 @@ public class ClientSocket {
 
             // MATCHMAKING
 
-            InetAddress matchmakingAddress = InetAddress.getByName(MATCHMAKING_SERVER_IP);
+            InetAddress matchmakingAddress = InetAddress.getByName(matchmakingAddressName);
 
             byte[] queueResponse = request(new byte[]{0x01}, 1, matchmakingAddress, MATCHMAKING_SERVER_PORT);
             checkFirstByte(queueResponse, 0x01);

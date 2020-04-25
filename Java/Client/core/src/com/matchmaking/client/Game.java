@@ -12,6 +12,8 @@ import java.util.List;
 
 public class Game extends ApplicationAdapter {
 
+	private final String[] args;
+
 	private ClientSocket socket;
 
 	private BitmapFont font;
@@ -19,6 +21,11 @@ public class Game extends ApplicationAdapter {
 	private ShapeRenderer shapeRenderer;
 
 	private final Player myPlayer = new Player();
+
+	public Game(String[] args) {
+		super();
+		this.args = args;
+	}
 
 	@Override
 	public void create () {
@@ -28,7 +35,7 @@ public class Game extends ApplicationAdapter {
 
 		font.setColor(0, 0, 0, 1);
 
-		this.socket = new ClientSocket(this);
+		this.socket = new ClientSocket(this, (args.length > 0) ? args[0] : "127.0.0.1");
 	}
 
 	@Override
@@ -81,7 +88,7 @@ public class Game extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Input.Keys.D)) {
 			dx += speed;
 		}
-		myPlayer.getPosition().update(dx, dy); // TODO troubleshoot
+		myPlayer.getPosition().update(dx, dy);
 	}
 	
 	@Override
