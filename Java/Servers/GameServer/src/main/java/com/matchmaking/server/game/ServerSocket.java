@@ -13,6 +13,8 @@ public class ServerSocket {
 
     private final static String MATCHMAKING_SERVER_IP = "127.0.0.1";
     private final static int MATCHMAKING_SERVER_PORT = 3000;
+    private final static int GAME_SERVER_START_PORT = 3001;
+    private final static int GAME_SERVER_END_PORT = 4000;
 
     private final static int GAME_LENGTH = 30000;
     private final static int LEAVE_LENGTH = 5000;
@@ -27,7 +29,7 @@ public class ServerSocket {
     public ServerSocket(String token) {
         try {
 
-            socket = new DatagramSocket();
+            socket = getNextAvailableSocket();
             socket.setSoTimeout(GAME_LENGTH);
 
             ByteBuffer buffer = ByteBuffer.allocate(33);
@@ -67,6 +69,25 @@ public class ServerSocket {
         } catch (IOException e) {
             fatalException(e);
         }
+    }
+
+    private DatagramSocket getNextAvailableSocket() {
+        for(int port = GAME_SERVER_START_PORT; port <= GAME_SERVER_END_PORT; port++) {
+            boolean success = false;
+            try {
+                socket = new DatagramSocket(port);
+                success = true;
+            } catch(IOException e) {
+                if(socket != null){
+                    socket.close();
+                    socket = null;
+                }
+            }
+            if(success) {
+                return socket;
+            }
+        }
+        return null;
     }
 
     private void send(RequestProtos.Response response, InetAddress address, int port) {

@@ -28,7 +28,7 @@ client <number of clients> <matchmaking server IPv6 address>
 The second parameter is optional.
 If left blank, the clients will assume the matchmaking server is running on the same device at `127.0.0.1`.
 If the matchmaking server is on a different device, visit https://www.whatismyip.com/ on the server's device to find its IPv6 address.
-Keep in mind that home network firewalls might block these requests, so it may be necessary to configure a pinhole for port 3000 on the host device.
+Keep in mind that home network firewalls might block these requests, so it may be necessary to configure a pinhole or port forward for ports 3000-4000 for the host device.
 
 ### Mac or Linux
 
@@ -57,4 +57,4 @@ Now, to run some clients, run the following command:
 The second parameter is optional.
 If left blank, the clients will assume the matchmaking server is running on the same device at `127.0.0.1`.
 If the matchmaking server is on a different device, visit https://www.whatismyip.com/ on the server's device to find its IPv6 address.
-Keep in mind that home network firewalls might block these requests, so it may be necessary to configure a pinhole for port 3000 on the host device.
+Keep in mind that home network firewalls might block these requests, so it may be necessary to configure a pinhole or port forward for ports 3000-4000 for the host device.
