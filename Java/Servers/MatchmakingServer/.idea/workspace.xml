@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24052967-7726-4895-ab17-b198f2a2584f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GameServer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/matchmaking/server/matchmaking/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/matchmaking/server/matchmaking/Queue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Scripts/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/run.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +118,7 @@
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
+      <path value="$PROJECT_DIR$/../../.." />
     </ignored-roots>
     <MESSAGE value="gradle" />
     <option name="LAST_COMMIT_MESSAGE" value="gradle" />
@@ -138,10 +136,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587789760054" />
-    <state x="461" y="150" key="SettingsEditor" timestamp="1587829275353">
+    <state x="461" y="150" key="SettingsEditor" timestamp="1587839324842">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="150" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587829275353" />
+    <state x="461" y="150" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587839324842" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1587784802230">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
