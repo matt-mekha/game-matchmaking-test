@@ -48,6 +48,8 @@ public class ClientSocket {
 
     private void fatalException(Exception e) {
         e.printStackTrace();
+        Logger.getInstance().log(e.toString());
+        Logger.getInstance().log(Arrays.toString(e.getStackTrace()));
         close();
         Gdx.app.exit();
     }
@@ -61,7 +63,7 @@ public class ClientSocket {
         }
     }
 
-    private byte[] receive(int length) throws SocketTimeoutException {
+    private byte[] receive(int length, InetAddress address, int port) throws SocketTimeoutException {
         byte[] buffer = new byte[length];
         DatagramPacket response = new DatagramPacket(buffer, length);
         try {
@@ -79,7 +81,7 @@ public class ClientSocket {
         for (int i = 0; i < MAX_TRIES; i++) {
             send(requestBytes, address, port);
             try {
-                return receive(responseLength);
+                return receive(responseLength, address, port);
             } catch (SocketTimeoutException e) {
                 e.printStackTrace();
             }
@@ -104,7 +106,7 @@ public class ClientSocket {
     private void checkFirstByte(byte[] response, int expected) throws IOException {
         byte expectedByte = (byte) expected;
         if(response[0] != expectedByte) {
-            throw new IOException("Malformed server response.");
+            throw new IOException(String.format("Malformed server response. Expected %d but got %d", expectedByte, response[0]));
         }
     }
 
@@ -122,13 +124,15 @@ public class ClientSocket {
             InetAddress matchmakingAddress = InetAddress.getByName(matchmakingAddressName);
 
             byte[] queueResponse = request(new byte[]{0x01}, 1, matchmakingAddress, MATCHMAKING_SERVER_PORT);
+
             checkFirstByte(queueResponse, 0x01);
             status = Status.QUEUED;
 
             socket.setSoTimeout(QUEUE_TIMEOUT);
-            byte[] matchResponse = receive(9);
+            byte[] matchResponse = receive(9, matchmakingAddress, MATCHMAKING_SERVER_PORT);
             socket.setSoTimeout(SOCKET_TIMEOUT);
             checkFirstByte(matchResponse, 0x02);
+
             status = Status.JOINING;
 
             InetAddress gameAddress = InetAddress.getByAddress(Arrays.copyOfRange(matchResponse, 1, 5));
@@ -163,6 +167,7 @@ public class ClientSocket {
         if(socket != null && !socket.isClosed()) {
             socket.close();
         }
+        Logger.getInstance().close();
     }
 
     public List<RequestProtos.Player> getPlayers() {

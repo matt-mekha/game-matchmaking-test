@@ -16,7 +16,7 @@ public class StreamPipe extends Thread {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line = reader.readLine()) != null)
-                outputStream.println(line);
+                outputStream.println("\tgame server:\t" + line);
         } catch (IOException e) {
             e.printStackTrace();
         }

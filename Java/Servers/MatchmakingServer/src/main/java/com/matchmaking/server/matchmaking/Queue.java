@@ -7,22 +7,23 @@ public class Queue {
 
     private final static int GAME_SIZE = 5;
 
-    private final ArrayList<Player> players = new ArrayList<>();
+    private final ServerSocket socket;
+    private final ArrayList<Client> clients = new ArrayList<>();
 
-    public boolean add(InetAddress address, int port) {
-        synchronized (players) {
-            players.add(new Player(address, port));
-            return players.size() >= GAME_SIZE;
-        }
+    public Queue(ServerSocket socket) {
+        this.socket = socket;
     }
 
-    public ArrayList<Player> getNextMatchPlayers() {
-        synchronized (players) {
-            ArrayList<Player> nextMatchPlayers = new ArrayList<>(GAME_SIZE);
-            for (int i = 0; i < GAME_SIZE; i++) {
-                nextMatchPlayers.add(players.remove(0));
+    public void add(InetAddress address, int port) {
+        synchronized (clients) {
+            clients.add(new Client(address, port));
+            if(clients.size() >= GAME_SIZE) {
+                ArrayList<Client> nextMatchClients = new ArrayList<>(GAME_SIZE);
+                for (int i = 0; i < GAME_SIZE; i++) {
+                    nextMatchClients.add(clients.remove(0));
+                }
+                socket.startMatch(nextMatchClients);
             }
-            return nextMatchPlayers;
         }
     }
 

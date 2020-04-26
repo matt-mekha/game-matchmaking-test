@@ -18,14 +18,15 @@ public class ServerSocket {
     private final static byte ERROR = 0x0F;
 
     private DatagramSocket socket;
-    private final Queue queue = new Queue();
+    private Queue queue;
     private final ArrayList<GameServer> gameServers = new ArrayList<>();
 
     public ServerSocket() {
         try {
             socket = new DatagramSocket(PORT);
+            queue = new Queue(this);
 
-            System.out.println("UP AND RUNNING!");
+            Logger.getInstance().log("UP AND RUNNING!");
 
             while(true) {
                 DatagramPacket packet = receive();
@@ -37,10 +38,11 @@ public class ServerSocket {
         }
     }
 
-    private void startMatch() {
+    public void startMatch(ArrayList<Client> clients) {
         try {
 
-            ArrayList<Player> players = queue.getNextMatchPlayers();
+            Logger.getInstance().log("spawning game server...");
+
             GameServer gameServer = new GameServer();
             gameServers.add(gameServer);
 
@@ -50,8 +52,9 @@ public class ServerSocket {
             byteBuffer.putInt(gameServer.getPort());
             byte[] matchFoundBytes = byteBuffer.array();
 
-            for(Player player : players) {
-                send(matchFoundBytes, player.getAddress(), player.getPort());
+            Logger.getInstance().log("successfully spawned game server");
+            for(Client client : clients) {
+                send(matchFoundBytes, client.getAddress(), client.getPort());
             }
 
         } catch (IOException | InterruptedException e) {
@@ -72,18 +75,14 @@ public class ServerSocket {
             }
         }
 
-        System.out.println(String.format("received request from %s:%d", packet.getAddress(), packet.getPort())); // DEBUG
+        Logger.getInstance().log(String.format("received request from %s:%d", packet.getAddress(), packet.getPort()));
 
         if (isServer) {
 
         } else {
             if (requestType == QUEUE) {
-                boolean ready = queue.add(address, port);
+                queue.add(address, port);
                 send(new byte[]{QUEUE}, address, port);
-
-                if (ready) {
-                    startMatch();
-                }
             } else if (requestType == TOKEN) {
                 GameServer.confirmToken(Arrays.copyOfRange(packet.getData(), 1, 33), address, port);
             } else {
@@ -114,6 +113,7 @@ public class ServerSocket {
 
     private void fatalException(Exception e) {
         e.printStackTrace();
+        Logger.getInstance().log(e.toString());
         close();
         System.exit(-1);
     }
@@ -122,6 +122,7 @@ public class ServerSocket {
         if(socket != null && !socket.isClosed()) {
             socket.close();
         }
+        Logger.getInstance().close();
     }
 
 }

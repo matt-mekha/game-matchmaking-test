@@ -1,4 +1,4 @@
-package com.matchmaking.server.matchmaking;
+package com.matchmaking.client;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class Logger {
 
     public Logger() {
         try {
-            fileWriter = new FileWriter(String.format("MatchmakingServerLog_%d.txt", System.currentTimeMillis()));
+            fileWriter = new FileWriter(String.format("ClientLog_%d.txt", System.currentTimeMillis()));
         } catch (IOException e) {
             e.printStackTrace();
         }
