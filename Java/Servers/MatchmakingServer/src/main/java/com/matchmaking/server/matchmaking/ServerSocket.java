@@ -81,8 +81,8 @@ public class ServerSocket {
 
         } else {
             if (requestType == QUEUE) {
-                queue.add(address, port);
                 send(new byte[]{QUEUE}, address, port);
+                queue.add(address, port);
             } else if (requestType == TOKEN) {
                 GameServer.confirmToken(Arrays.copyOfRange(packet.getData(), 1, 33), address, port);
             } else {
