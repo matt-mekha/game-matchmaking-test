@@ -1,6 +1,6 @@
 cd ../../Java
 mkdir -p WorkingDirectory
-rm -r WorkingDirectory/*
+rm -r WorkingDirectory/
 
 cd Client
 ./build.sh &

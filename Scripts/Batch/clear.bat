@@ -1,3 +1,3 @@
 cd ../../Java/WorkingDirectory
-explorer .
+del *.txt
 cd ../../Scripts/Batch
