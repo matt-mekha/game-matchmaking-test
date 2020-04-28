@@ -23,6 +23,7 @@ public class Connection {
     private final Game game;
 
     private Location gameServerLocation;
+    private Access gameServerAccess;
     private boolean gameRunning;
 
     public Connection(Game game, String[] args) {
@@ -54,13 +55,14 @@ public class Connection {
     public void listenForMatch(Response responseProto) {
         if(status != Status.CONNECTING) return;
 
-        assertSuccess(responseProto);
         status = Status.QUEUED;
 
         protoSocket.listen(
                 MessageType.MATCH,
                 this::joinMatch,
-                () -> Logger.fatalException(new SocketTimeoutException("queue timed out")),
+                (timeout) -> {
+                    if (timeout) Logger.fatalException(new SocketTimeoutException("queue timed out"));
+                },
                 Constants.QUEUE_TIMEOUT
         );
     }
@@ -75,12 +77,17 @@ public class Connection {
 
         status = Status.JOINING;
 
-        gameServerLocation = new Location(requestProto.getMessage().getGameServerLocation());
+        gameServerLocation = new Location(requestProto.getMessage().getAccess());
+        gameServerAccess = Access.newBuilder()
+                .setToken(requestProto.getMessage().getAccess().getToken())
+                .build();
+
         protoSocket.request(
                 new ProtoPacket<>(
                         Request.newBuilder()
                                 .setType(MessageType.JOIN)
                                 .setPlayer(game.getMyPlayer())
+                                .setAccess(gameServerAccess)
                                 .build(),
                         gameServerLocation
                 ),
@@ -94,11 +101,10 @@ public class Connection {
     }
 
     public void onJoin(Response responseProto) {
-        assertSuccess(responseProto);
         status = Status.GAME;
         gameRunning = true;
 
-        protoSocket.listen(MessageType.LEAVE, this::onLeave, this::onLeaveTimeout, Constants.GAME_LENGTH);
+        protoSocket.listen(MessageType.LEAVE, this::onLeave, this::onLeaveFinish, Constants.JOIN_TIMEOUT + Constants.GAME_LENGTH);
 
         while(gameRunning) {
             protoSocket.request(
@@ -106,6 +112,7 @@ public class Connection {
                             Request.newBuilder()
                                     .setType(MessageType.UPDATE)
                                     .setPlayer(game.getMyPlayer())
+                                    .setAccess(gameServerAccess)
                                     .build(),
                             gameServerLocation
                     ),
@@ -121,8 +128,6 @@ public class Connection {
     }
 
     public void onUpdate(Response responseProto) {
-        assertSuccess(responseProto);
-
         players.clear();
         players.addAll(responseProto.getPlayersList());
     }
@@ -136,12 +141,8 @@ public class Connection {
                 .build();
     }
 
-    public void onLeaveTimeout() {
+    public void onLeaveFinish(boolean timeout) {
         gameRunning = false;
-    }
-
-    private void assertSuccess(Response responseProto) {
-        assert responseProto.getSuccess();
     }
 
     public Status getStatus() {

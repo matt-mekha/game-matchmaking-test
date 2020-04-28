@@ -15,10 +15,17 @@ public final class Constants {
     public static final int GAME_UPDATE_INTERVAL = 50;
 
     public static final int QUEUE_TIMEOUT = 60000;
-    public static final int GAME_LENGTH = 30000;
+    public static final int JOIN_TIMEOUT = 7000;
+    public static final int GAME_LENGTH = 45000;
+    public static final int LEAVE_TIMEOUT = 7000;
+    public static final int GAME_SERVER_SPAWN_TIMEOUT = 10000;
 
     public static final ProtoSocket.Location MATCHMAKING_SERVER = new ProtoSocket.Location(
             "127.0.0.1",
             3000
     );
+    public static final int GAME_SERVER_START_PORT = 3001;
+    public static final int GAME_SERVER_END_PORT = 4000;
+
+    public static final String GAME_SERVER_JAR_NAME = "gameserver";
 }

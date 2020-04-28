@@ -1,3 +1,2 @@
 rootProject.name = "matchmaking"
-include("util", "client")
-include("matchmaker")
+include("util", "client", "matchmaker", "gameserver")

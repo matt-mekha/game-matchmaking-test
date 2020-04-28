@@ -1,1 +1,1 @@
-idea .
+start "" idea.exe .

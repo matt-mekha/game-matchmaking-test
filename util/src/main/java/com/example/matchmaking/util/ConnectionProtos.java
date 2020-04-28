@@ -39,6 +39,10 @@ public final class ConnectionProtos {
      * <code>LEAVE = 4;</code>
      */
     LEAVE(4),
+    /**
+     * <code>REGISTER_GAME = 5;</code>
+     */
+    REGISTER_GAME(5),
     UNRECOGNIZED(-1),
     ;
 
@@ -62,6 +66,10 @@ public final class ConnectionProtos {
      * <code>LEAVE = 4;</code>
      */
     public static final int LEAVE_VALUE = 4;
+    /**
+     * <code>REGISTER_GAME = 5;</code>
+     */
+    public static final int REGISTER_GAME_VALUE = 5;
 
 
     public final int getNumber() {
@@ -93,6 +101,7 @@ public final class ConnectionProtos {
         case 2: return JOIN;
         case 3: return UPDATE;
         case 4: return LEAVE;
+        case 5: return REGISTER_GAME;
         default: return null;
       }
     }
@@ -2149,8 +2158,8 @@ public final class ConnectionProtos {
 
   }
 
-  public interface ServerLocationOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ServerLocation)
+  public interface AccessOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Access)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2164,28 +2173,35 @@ public final class ConnectionProtos {
      * @return The port.
      */
     int getPort();
+
+    /**
+     * <code>bytes token = 3;</code>
+     * @return The token.
+     */
+    com.google.protobuf.ByteString getToken();
   }
   /**
-   * Protobuf type {@code ServerLocation}
+   * Protobuf type {@code Access}
    */
-  public  static final class ServerLocation extends
+  public  static final class Access extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ServerLocation)
-      ServerLocationOrBuilder {
+      // @@protoc_insertion_point(message_implements:Access)
+      AccessOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use ServerLocation.newBuilder() to construct.
-    private ServerLocation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use Access.newBuilder() to construct.
+    private Access(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ServerLocation() {
+    private Access() {
       address_ = com.google.protobuf.ByteString.EMPTY;
+      token_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new ServerLocation();
+      return new Access();
     }
 
     @java.lang.Override
@@ -2193,7 +2209,7 @@ public final class ConnectionProtos {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ServerLocation(
+    private Access(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2221,6 +2237,11 @@ public final class ConnectionProtos {
               port_ = input.readUInt32();
               break;
             }
+            case 26: {
+
+              token_ = input.readBytes();
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -2242,15 +2263,15 @@ public final class ConnectionProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.example.matchmaking.util.ConnectionProtos.internal_static_ServerLocation_descriptor;
+      return com.example.matchmaking.util.ConnectionProtos.internal_static_Access_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.example.matchmaking.util.ConnectionProtos.internal_static_ServerLocation_fieldAccessorTable
+      return com.example.matchmaking.util.ConnectionProtos.internal_static_Access_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.example.matchmaking.util.ConnectionProtos.ServerLocation.class, com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder.class);
+              com.example.matchmaking.util.ConnectionProtos.Access.class, com.example.matchmaking.util.ConnectionProtos.Access.Builder.class);
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 1;
@@ -2273,6 +2294,16 @@ public final class ConnectionProtos {
       return port_;
     }
 
+    public static final int TOKEN_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString token_;
+    /**
+     * <code>bytes token = 3;</code>
+     * @return The token.
+     */
+    public com.google.protobuf.ByteString getToken() {
+      return token_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2293,6 +2324,9 @@ public final class ConnectionProtos {
       if (port_ != 0) {
         output.writeUInt32(2, port_);
       }
+      if (!token_.isEmpty()) {
+        output.writeBytes(3, token_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2310,6 +2344,10 @@ public final class ConnectionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, port_);
       }
+      if (!token_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, token_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2320,15 +2358,17 @@ public final class ConnectionProtos {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.example.matchmaking.util.ConnectionProtos.ServerLocation)) {
+      if (!(obj instanceof com.example.matchmaking.util.ConnectionProtos.Access)) {
         return super.equals(obj);
       }
-      com.example.matchmaking.util.ConnectionProtos.ServerLocation other = (com.example.matchmaking.util.ConnectionProtos.ServerLocation) obj;
+      com.example.matchmaking.util.ConnectionProtos.Access other = (com.example.matchmaking.util.ConnectionProtos.Access) obj;
 
       if (!getAddress()
           .equals(other.getAddress())) return false;
       if (getPort()
           != other.getPort()) return false;
+      if (!getToken()
+          .equals(other.getToken())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2344,74 +2384,76 @@ public final class ConnectionProtos {
       hash = (53 * hash) + getAddress().hashCode();
       hash = (37 * hash) + PORT_FIELD_NUMBER;
       hash = (53 * hash) + getPort();
+      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
+      hash = (53 * hash) + getToken().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(byte[] data)
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(java.io.InputStream input)
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseDelimitedFrom(java.io.InputStream input)
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseDelimitedFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation parseFrom(
+    public static com.example.matchmaking.util.ConnectionProtos.Access parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2424,7 +2466,7 @@ public final class ConnectionProtos {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.example.matchmaking.util.ConnectionProtos.ServerLocation prototype) {
+    public static Builder newBuilder(com.example.matchmaking.util.ConnectionProtos.Access prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2440,26 +2482,26 @@ public final class ConnectionProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code ServerLocation}
+     * Protobuf type {@code Access}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ServerLocation)
-        com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder {
+        // @@protoc_insertion_point(builder_implements:Access)
+        com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.example.matchmaking.util.ConnectionProtos.internal_static_ServerLocation_descriptor;
+        return com.example.matchmaking.util.ConnectionProtos.internal_static_Access_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.example.matchmaking.util.ConnectionProtos.internal_static_ServerLocation_fieldAccessorTable
+        return com.example.matchmaking.util.ConnectionProtos.internal_static_Access_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.example.matchmaking.util.ConnectionProtos.ServerLocation.class, com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder.class);
+                com.example.matchmaking.util.ConnectionProtos.Access.class, com.example.matchmaking.util.ConnectionProtos.Access.Builder.class);
       }
 
-      // Construct using com.example.matchmaking.util.ConnectionProtos.ServerLocation.newBuilder()
+      // Construct using com.example.matchmaking.util.ConnectionProtos.Access.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2481,23 +2523,25 @@ public final class ConnectionProtos {
 
         port_ = 0;
 
+        token_ = com.google.protobuf.ByteString.EMPTY;
+
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.example.matchmaking.util.ConnectionProtos.internal_static_ServerLocation_descriptor;
+        return com.example.matchmaking.util.ConnectionProtos.internal_static_Access_descriptor;
       }
 
       @java.lang.Override
-      public com.example.matchmaking.util.ConnectionProtos.ServerLocation getDefaultInstanceForType() {
-        return com.example.matchmaking.util.ConnectionProtos.ServerLocation.getDefaultInstance();
+      public com.example.matchmaking.util.ConnectionProtos.Access getDefaultInstanceForType() {
+        return com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.example.matchmaking.util.ConnectionProtos.ServerLocation build() {
-        com.example.matchmaking.util.ConnectionProtos.ServerLocation result = buildPartial();
+      public com.example.matchmaking.util.ConnectionProtos.Access build() {
+        com.example.matchmaking.util.ConnectionProtos.Access result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2505,10 +2549,11 @@ public final class ConnectionProtos {
       }
 
       @java.lang.Override
-      public com.example.matchmaking.util.ConnectionProtos.ServerLocation buildPartial() {
-        com.example.matchmaking.util.ConnectionProtos.ServerLocation result = new com.example.matchmaking.util.ConnectionProtos.ServerLocation(this);
+      public com.example.matchmaking.util.ConnectionProtos.Access buildPartial() {
+        com.example.matchmaking.util.ConnectionProtos.Access result = new com.example.matchmaking.util.ConnectionProtos.Access(this);
         result.address_ = address_;
         result.port_ = port_;
+        result.token_ = token_;
         onBuilt();
         return result;
       }
@@ -2547,21 +2592,24 @@ public final class ConnectionProtos {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.example.matchmaking.util.ConnectionProtos.ServerLocation) {
-          return mergeFrom((com.example.matchmaking.util.ConnectionProtos.ServerLocation)other);
+        if (other instanceof com.example.matchmaking.util.ConnectionProtos.Access) {
+          return mergeFrom((com.example.matchmaking.util.ConnectionProtos.Access)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.example.matchmaking.util.ConnectionProtos.ServerLocation other) {
-        if (other == com.example.matchmaking.util.ConnectionProtos.ServerLocation.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.example.matchmaking.util.ConnectionProtos.Access other) {
+        if (other == com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance()) return this;
         if (other.getAddress() != com.google.protobuf.ByteString.EMPTY) {
           setAddress(other.getAddress());
         }
         if (other.getPort() != 0) {
           setPort(other.getPort());
+        }
+        if (other.getToken() != com.google.protobuf.ByteString.EMPTY) {
+          setToken(other.getToken());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2578,11 +2626,11 @@ public final class ConnectionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.example.matchmaking.util.ConnectionProtos.ServerLocation parsedMessage = null;
+        com.example.matchmaking.util.ConnectionProtos.Access parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.example.matchmaking.util.ConnectionProtos.ServerLocation) e.getUnfinishedMessage();
+          parsedMessage = (com.example.matchmaking.util.ConnectionProtos.Access) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2654,6 +2702,39 @@ public final class ConnectionProtos {
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.ByteString token_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes token = 3;</code>
+       * @return The token.
+       */
+      public com.google.protobuf.ByteString getToken() {
+        return token_;
+      }
+      /**
+       * <code>bytes token = 3;</code>
+       * @param value The token to set.
+       * @return This builder for chaining.
+       */
+      public Builder setToken(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes token = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearToken() {
+        
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2667,41 +2748,41 @@ public final class ConnectionProtos {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:ServerLocation)
+      // @@protoc_insertion_point(builder_scope:Access)
     }
 
-    // @@protoc_insertion_point(class_scope:ServerLocation)
-    private static final com.example.matchmaking.util.ConnectionProtos.ServerLocation DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:Access)
+    private static final com.example.matchmaking.util.ConnectionProtos.Access DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.example.matchmaking.util.ConnectionProtos.ServerLocation();
+      DEFAULT_INSTANCE = new com.example.matchmaking.util.ConnectionProtos.Access();
     }
 
-    public static com.example.matchmaking.util.ConnectionProtos.ServerLocation getDefaultInstance() {
+    public static com.example.matchmaking.util.ConnectionProtos.Access getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ServerLocation>
-        PARSER = new com.google.protobuf.AbstractParser<ServerLocation>() {
+    private static final com.google.protobuf.Parser<Access>
+        PARSER = new com.google.protobuf.AbstractParser<Access>() {
       @java.lang.Override
-      public ServerLocation parsePartialFrom(
+      public Access parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ServerLocation(input, extensionRegistry);
+        return new Access(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ServerLocation> parser() {
+    public static com.google.protobuf.Parser<Access> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ServerLocation> getParserForType() {
+    public com.google.protobuf.Parser<Access> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.example.matchmaking.util.ConnectionProtos.ServerLocation getDefaultInstanceForType() {
+    public com.example.matchmaking.util.ConnectionProtos.Access getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2738,25 +2819,19 @@ public final class ConnectionProtos {
     com.example.matchmaking.util.ConnectionProtos.PlayerOrBuilder getPlayerOrBuilder();
 
     /**
-     * <code>bytes token = 3;</code>
-     * @return The token.
+     * <code>.Access access = 3;</code>
+     * @return Whether the access field is set.
      */
-    com.google.protobuf.ByteString getToken();
-
+    boolean hasAccess();
     /**
-     * <code>.ServerLocation game_server_location = 4;</code>
-     * @return Whether the gameServerLocation field is set.
+     * <code>.Access access = 3;</code>
+     * @return The access.
      */
-    boolean hasGameServerLocation();
+    com.example.matchmaking.util.ConnectionProtos.Access getAccess();
     /**
-     * <code>.ServerLocation game_server_location = 4;</code>
-     * @return The gameServerLocation.
+     * <code>.Access access = 3;</code>
      */
-    com.example.matchmaking.util.ConnectionProtos.ServerLocation getGameServerLocation();
-    /**
-     * <code>.ServerLocation game_server_location = 4;</code>
-     */
-    com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder getGameServerLocationOrBuilder();
+    com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder getAccessOrBuilder();
   }
   /**
    * Protobuf type {@code Request}
@@ -2772,7 +2847,6 @@ public final class ConnectionProtos {
     }
     private Request() {
       type_ = 0;
-      token_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -2825,19 +2899,14 @@ public final class ConnectionProtos {
               break;
             }
             case 26: {
-
-              token_ = input.readBytes();
-              break;
-            }
-            case 34: {
-              com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder subBuilder = null;
-              if (gameServerLocation_ != null) {
-                subBuilder = gameServerLocation_.toBuilder();
+              com.example.matchmaking.util.ConnectionProtos.Access.Builder subBuilder = null;
+              if (access_ != null) {
+                subBuilder = access_.toBuilder();
               }
-              gameServerLocation_ = input.readMessage(com.example.matchmaking.util.ConnectionProtos.ServerLocation.parser(), extensionRegistry);
+              access_ = input.readMessage(com.example.matchmaking.util.ConnectionProtos.Access.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(gameServerLocation_);
-                gameServerLocation_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(access_);
+                access_ = subBuilder.buildPartial();
               }
 
               break;
@@ -2916,37 +2985,27 @@ public final class ConnectionProtos {
       return getPlayer();
     }
 
-    public static final int TOKEN_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString token_;
+    public static final int ACCESS_FIELD_NUMBER = 3;
+    private com.example.matchmaking.util.ConnectionProtos.Access access_;
     /**
-     * <code>bytes token = 3;</code>
-     * @return The token.
+     * <code>.Access access = 3;</code>
+     * @return Whether the access field is set.
      */
-    public com.google.protobuf.ByteString getToken() {
-      return token_;
-    }
-
-    public static final int GAME_SERVER_LOCATION_FIELD_NUMBER = 4;
-    private com.example.matchmaking.util.ConnectionProtos.ServerLocation gameServerLocation_;
-    /**
-     * <code>.ServerLocation game_server_location = 4;</code>
-     * @return Whether the gameServerLocation field is set.
-     */
-    public boolean hasGameServerLocation() {
-      return gameServerLocation_ != null;
+    public boolean hasAccess() {
+      return access_ != null;
     }
     /**
-     * <code>.ServerLocation game_server_location = 4;</code>
-     * @return The gameServerLocation.
+     * <code>.Access access = 3;</code>
+     * @return The access.
      */
-    public com.example.matchmaking.util.ConnectionProtos.ServerLocation getGameServerLocation() {
-      return gameServerLocation_ == null ? com.example.matchmaking.util.ConnectionProtos.ServerLocation.getDefaultInstance() : gameServerLocation_;
+    public com.example.matchmaking.util.ConnectionProtos.Access getAccess() {
+      return access_ == null ? com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance() : access_;
     }
     /**
-     * <code>.ServerLocation game_server_location = 4;</code>
+     * <code>.Access access = 3;</code>
      */
-    public com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder getGameServerLocationOrBuilder() {
-      return getGameServerLocation();
+    public com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder getAccessOrBuilder() {
+      return getAccess();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2969,11 +3028,8 @@ public final class ConnectionProtos {
       if (player_ != null) {
         output.writeMessage(2, getPlayer());
       }
-      if (!token_.isEmpty()) {
-        output.writeBytes(3, token_);
-      }
-      if (gameServerLocation_ != null) {
-        output.writeMessage(4, getGameServerLocation());
+      if (access_ != null) {
+        output.writeMessage(3, getAccess());
       }
       unknownFields.writeTo(output);
     }
@@ -2992,13 +3048,9 @@ public final class ConnectionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getPlayer());
       }
-      if (!token_.isEmpty()) {
+      if (access_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, token_);
-      }
-      if (gameServerLocation_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getGameServerLocation());
+          .computeMessageSize(3, getAccess());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3021,12 +3073,10 @@ public final class ConnectionProtos {
         if (!getPlayer()
             .equals(other.getPlayer())) return false;
       }
-      if (!getToken()
-          .equals(other.getToken())) return false;
-      if (hasGameServerLocation() != other.hasGameServerLocation()) return false;
-      if (hasGameServerLocation()) {
-        if (!getGameServerLocation()
-            .equals(other.getGameServerLocation())) return false;
+      if (hasAccess() != other.hasAccess()) return false;
+      if (hasAccess()) {
+        if (!getAccess()
+            .equals(other.getAccess())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -3045,11 +3095,9 @@ public final class ConnectionProtos {
         hash = (37 * hash) + PLAYER_FIELD_NUMBER;
         hash = (53 * hash) + getPlayer().hashCode();
       }
-      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
-      hash = (53 * hash) + getToken().hashCode();
-      if (hasGameServerLocation()) {
-        hash = (37 * hash) + GAME_SERVER_LOCATION_FIELD_NUMBER;
-        hash = (53 * hash) + getGameServerLocation().hashCode();
+      if (hasAccess()) {
+        hash = (37 * hash) + ACCESS_FIELD_NUMBER;
+        hash = (53 * hash) + getAccess().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -3192,13 +3240,11 @@ public final class ConnectionProtos {
           player_ = null;
           playerBuilder_ = null;
         }
-        token_ = com.google.protobuf.ByteString.EMPTY;
-
-        if (gameServerLocationBuilder_ == null) {
-          gameServerLocation_ = null;
+        if (accessBuilder_ == null) {
+          access_ = null;
         } else {
-          gameServerLocation_ = null;
-          gameServerLocationBuilder_ = null;
+          access_ = null;
+          accessBuilder_ = null;
         }
         return this;
       }
@@ -3232,11 +3278,10 @@ public final class ConnectionProtos {
         } else {
           result.player_ = playerBuilder_.build();
         }
-        result.token_ = token_;
-        if (gameServerLocationBuilder_ == null) {
-          result.gameServerLocation_ = gameServerLocation_;
+        if (accessBuilder_ == null) {
+          result.access_ = access_;
         } else {
-          result.gameServerLocation_ = gameServerLocationBuilder_.build();
+          result.access_ = accessBuilder_.build();
         }
         onBuilt();
         return result;
@@ -3292,11 +3337,8 @@ public final class ConnectionProtos {
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
         }
-        if (other.getToken() != com.google.protobuf.ByteString.EMPTY) {
-          setToken(other.getToken());
-        }
-        if (other.hasGameServerLocation()) {
-          mergeGameServerLocation(other.getGameServerLocation());
+        if (other.hasAccess()) {
+          mergeAccess(other.getAccess());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3498,156 +3540,123 @@ public final class ConnectionProtos {
         return playerBuilder_;
       }
 
-      private com.google.protobuf.ByteString token_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes token = 3;</code>
-       * @return The token.
-       */
-      public com.google.protobuf.ByteString getToken() {
-        return token_;
-      }
-      /**
-       * <code>bytes token = 3;</code>
-       * @param value The token to set.
-       * @return This builder for chaining.
-       */
-      public Builder setToken(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        token_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes token = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearToken() {
-        
-        token_ = getDefaultInstance().getToken();
-        onChanged();
-        return this;
-      }
-
-      private com.example.matchmaking.util.ConnectionProtos.ServerLocation gameServerLocation_;
+      private com.example.matchmaking.util.ConnectionProtos.Access access_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.example.matchmaking.util.ConnectionProtos.ServerLocation, com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder, com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder> gameServerLocationBuilder_;
+          com.example.matchmaking.util.ConnectionProtos.Access, com.example.matchmaking.util.ConnectionProtos.Access.Builder, com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> accessBuilder_;
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
-       * @return Whether the gameServerLocation field is set.
+       * <code>.Access access = 3;</code>
+       * @return Whether the access field is set.
        */
-      public boolean hasGameServerLocation() {
-        return gameServerLocationBuilder_ != null || gameServerLocation_ != null;
+      public boolean hasAccess() {
+        return accessBuilder_ != null || access_ != null;
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
-       * @return The gameServerLocation.
+       * <code>.Access access = 3;</code>
+       * @return The access.
        */
-      public com.example.matchmaking.util.ConnectionProtos.ServerLocation getGameServerLocation() {
-        if (gameServerLocationBuilder_ == null) {
-          return gameServerLocation_ == null ? com.example.matchmaking.util.ConnectionProtos.ServerLocation.getDefaultInstance() : gameServerLocation_;
+      public com.example.matchmaking.util.ConnectionProtos.Access getAccess() {
+        if (accessBuilder_ == null) {
+          return access_ == null ? com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance() : access_;
         } else {
-          return gameServerLocationBuilder_.getMessage();
+          return accessBuilder_.getMessage();
         }
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
-      public Builder setGameServerLocation(com.example.matchmaking.util.ConnectionProtos.ServerLocation value) {
-        if (gameServerLocationBuilder_ == null) {
+      public Builder setAccess(com.example.matchmaking.util.ConnectionProtos.Access value) {
+        if (accessBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          gameServerLocation_ = value;
+          access_ = value;
           onChanged();
         } else {
-          gameServerLocationBuilder_.setMessage(value);
+          accessBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
-      public Builder setGameServerLocation(
-          com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder builderForValue) {
-        if (gameServerLocationBuilder_ == null) {
-          gameServerLocation_ = builderForValue.build();
+      public Builder setAccess(
+          com.example.matchmaking.util.ConnectionProtos.Access.Builder builderForValue) {
+        if (accessBuilder_ == null) {
+          access_ = builderForValue.build();
           onChanged();
         } else {
-          gameServerLocationBuilder_.setMessage(builderForValue.build());
+          accessBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
-      public Builder mergeGameServerLocation(com.example.matchmaking.util.ConnectionProtos.ServerLocation value) {
-        if (gameServerLocationBuilder_ == null) {
-          if (gameServerLocation_ != null) {
-            gameServerLocation_ =
-              com.example.matchmaking.util.ConnectionProtos.ServerLocation.newBuilder(gameServerLocation_).mergeFrom(value).buildPartial();
+      public Builder mergeAccess(com.example.matchmaking.util.ConnectionProtos.Access value) {
+        if (accessBuilder_ == null) {
+          if (access_ != null) {
+            access_ =
+              com.example.matchmaking.util.ConnectionProtos.Access.newBuilder(access_).mergeFrom(value).buildPartial();
           } else {
-            gameServerLocation_ = value;
+            access_ = value;
           }
           onChanged();
         } else {
-          gameServerLocationBuilder_.mergeFrom(value);
+          accessBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
-      public Builder clearGameServerLocation() {
-        if (gameServerLocationBuilder_ == null) {
-          gameServerLocation_ = null;
+      public Builder clearAccess() {
+        if (accessBuilder_ == null) {
+          access_ = null;
           onChanged();
         } else {
-          gameServerLocation_ = null;
-          gameServerLocationBuilder_ = null;
+          access_ = null;
+          accessBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
-      public com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder getGameServerLocationBuilder() {
+      public com.example.matchmaking.util.ConnectionProtos.Access.Builder getAccessBuilder() {
         
         onChanged();
-        return getGameServerLocationFieldBuilder().getBuilder();
+        return getAccessFieldBuilder().getBuilder();
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
-      public com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder getGameServerLocationOrBuilder() {
-        if (gameServerLocationBuilder_ != null) {
-          return gameServerLocationBuilder_.getMessageOrBuilder();
+      public com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder getAccessOrBuilder() {
+        if (accessBuilder_ != null) {
+          return accessBuilder_.getMessageOrBuilder();
         } else {
-          return gameServerLocation_ == null ?
-              com.example.matchmaking.util.ConnectionProtos.ServerLocation.getDefaultInstance() : gameServerLocation_;
+          return access_ == null ?
+              com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance() : access_;
         }
       }
       /**
-       * <code>.ServerLocation game_server_location = 4;</code>
+       * <code>.Access access = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.example.matchmaking.util.ConnectionProtos.ServerLocation, com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder, com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder> 
-          getGameServerLocationFieldBuilder() {
-        if (gameServerLocationBuilder_ == null) {
-          gameServerLocationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.example.matchmaking.util.ConnectionProtos.ServerLocation, com.example.matchmaking.util.ConnectionProtos.ServerLocation.Builder, com.example.matchmaking.util.ConnectionProtos.ServerLocationOrBuilder>(
-                  getGameServerLocation(),
+          com.example.matchmaking.util.ConnectionProtos.Access, com.example.matchmaking.util.ConnectionProtos.Access.Builder, com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> 
+          getAccessFieldBuilder() {
+        if (accessBuilder_ == null) {
+          accessBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.example.matchmaking.util.ConnectionProtos.Access, com.example.matchmaking.util.ConnectionProtos.Access.Builder, com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder>(
+                  getAccess(),
                   getParentForChildren(),
                   isClean());
-          gameServerLocation_ = null;
+          access_ = null;
         }
-        return gameServerLocationBuilder_;
+        return accessBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3746,6 +3755,30 @@ public final class ConnectionProtos {
      */
     com.example.matchmaking.util.ConnectionProtos.PlayerOrBuilder getPlayersOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    java.util.List<com.example.matchmaking.util.ConnectionProtos.Access> 
+        getPlayerAccessList();
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    com.example.matchmaking.util.ConnectionProtos.Access getPlayerAccess(int index);
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    int getPlayerAccessCount();
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    java.util.List<? extends com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> 
+        getPlayerAccessOrBuilderList();
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder getPlayerAccessOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code Response}
@@ -3762,6 +3795,7 @@ public final class ConnectionProtos {
     private Response() {
       type_ = 0;
       players_ = java.util.Collections.emptyList();
+      playerAccess_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -3815,6 +3849,15 @@ public final class ConnectionProtos {
                   input.readMessage(com.example.matchmaking.util.ConnectionProtos.Player.parser(), extensionRegistry));
               break;
             }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                playerAccess_ = new java.util.ArrayList<com.example.matchmaking.util.ConnectionProtos.Access>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              playerAccess_.add(
+                  input.readMessage(com.example.matchmaking.util.ConnectionProtos.Access.parser(), extensionRegistry));
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -3832,6 +3875,9 @@ public final class ConnectionProtos {
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
           players_ = java.util.Collections.unmodifiableList(players_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          playerAccess_ = java.util.Collections.unmodifiableList(playerAccess_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3914,6 +3960,41 @@ public final class ConnectionProtos {
       return players_.get(index);
     }
 
+    public static final int PLAYER_ACCESS_FIELD_NUMBER = 4;
+    private java.util.List<com.example.matchmaking.util.ConnectionProtos.Access> playerAccess_;
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    public java.util.List<com.example.matchmaking.util.ConnectionProtos.Access> getPlayerAccessList() {
+      return playerAccess_;
+    }
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    public java.util.List<? extends com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> 
+        getPlayerAccessOrBuilderList() {
+      return playerAccess_;
+    }
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    public int getPlayerAccessCount() {
+      return playerAccess_.size();
+    }
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    public com.example.matchmaking.util.ConnectionProtos.Access getPlayerAccess(int index) {
+      return playerAccess_.get(index);
+    }
+    /**
+     * <code>repeated .Access player_access = 4;</code>
+     */
+    public com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder getPlayerAccessOrBuilder(
+        int index) {
+      return playerAccess_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3937,6 +4018,9 @@ public final class ConnectionProtos {
       for (int i = 0; i < players_.size(); i++) {
         output.writeMessage(3, players_.get(i));
       }
+      for (int i = 0; i < playerAccess_.size(); i++) {
+        output.writeMessage(4, playerAccess_.get(i));
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3958,6 +4042,10 @@ public final class ConnectionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, players_.get(i));
       }
+      for (int i = 0; i < playerAccess_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, playerAccess_.get(i));
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -3978,6 +4066,8 @@ public final class ConnectionProtos {
       if (type_ != other.type_) return false;
       if (!getPlayersList()
           .equals(other.getPlayersList())) return false;
+      if (!getPlayerAccessList()
+          .equals(other.getPlayerAccessList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3997,6 +4087,10 @@ public final class ConnectionProtos {
       if (getPlayersCount() > 0) {
         hash = (37 * hash) + PLAYERS_FIELD_NUMBER;
         hash = (53 * hash) + getPlayersList().hashCode();
+      }
+      if (getPlayerAccessCount() > 0) {
+        hash = (37 * hash) + PLAYER_ACCESS_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerAccessList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -4127,6 +4221,7 @@ public final class ConnectionProtos {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getPlayersFieldBuilder();
+          getPlayerAccessFieldBuilder();
         }
       }
       @java.lang.Override
@@ -4141,6 +4236,12 @@ public final class ConnectionProtos {
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           playersBuilder_.clear();
+        }
+        if (playerAccessBuilder_ == null) {
+          playerAccess_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          playerAccessBuilder_.clear();
         }
         return this;
       }
@@ -4179,6 +4280,15 @@ public final class ConnectionProtos {
           result.players_ = players_;
         } else {
           result.players_ = playersBuilder_.build();
+        }
+        if (playerAccessBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0)) {
+            playerAccess_ = java.util.Collections.unmodifiableList(playerAccess_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.playerAccess_ = playerAccess_;
+        } else {
+          result.playerAccess_ = playerAccessBuilder_.build();
         }
         onBuilt();
         return result;
@@ -4257,6 +4367,32 @@ public final class ConnectionProtos {
                    getPlayersFieldBuilder() : null;
             } else {
               playersBuilder_.addAllMessages(other.players_);
+            }
+          }
+        }
+        if (playerAccessBuilder_ == null) {
+          if (!other.playerAccess_.isEmpty()) {
+            if (playerAccess_.isEmpty()) {
+              playerAccess_ = other.playerAccess_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensurePlayerAccessIsMutable();
+              playerAccess_.addAll(other.playerAccess_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.playerAccess_.isEmpty()) {
+            if (playerAccessBuilder_.isEmpty()) {
+              playerAccessBuilder_.dispose();
+              playerAccessBuilder_ = null;
+              playerAccess_ = other.playerAccess_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              playerAccessBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getPlayerAccessFieldBuilder() : null;
+            } else {
+              playerAccessBuilder_.addAllMessages(other.playerAccess_);
             }
           }
         }
@@ -4611,6 +4747,246 @@ public final class ConnectionProtos {
         }
         return playersBuilder_;
       }
+
+      private java.util.List<com.example.matchmaking.util.ConnectionProtos.Access> playerAccess_ =
+        java.util.Collections.emptyList();
+      private void ensurePlayerAccessIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          playerAccess_ = new java.util.ArrayList<com.example.matchmaking.util.ConnectionProtos.Access>(playerAccess_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.matchmaking.util.ConnectionProtos.Access, com.example.matchmaking.util.ConnectionProtos.Access.Builder, com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> playerAccessBuilder_;
+
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public java.util.List<com.example.matchmaking.util.ConnectionProtos.Access> getPlayerAccessList() {
+        if (playerAccessBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(playerAccess_);
+        } else {
+          return playerAccessBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public int getPlayerAccessCount() {
+        if (playerAccessBuilder_ == null) {
+          return playerAccess_.size();
+        } else {
+          return playerAccessBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public com.example.matchmaking.util.ConnectionProtos.Access getPlayerAccess(int index) {
+        if (playerAccessBuilder_ == null) {
+          return playerAccess_.get(index);
+        } else {
+          return playerAccessBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder setPlayerAccess(
+          int index, com.example.matchmaking.util.ConnectionProtos.Access value) {
+        if (playerAccessBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerAccessIsMutable();
+          playerAccess_.set(index, value);
+          onChanged();
+        } else {
+          playerAccessBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder setPlayerAccess(
+          int index, com.example.matchmaking.util.ConnectionProtos.Access.Builder builderForValue) {
+        if (playerAccessBuilder_ == null) {
+          ensurePlayerAccessIsMutable();
+          playerAccess_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          playerAccessBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder addPlayerAccess(com.example.matchmaking.util.ConnectionProtos.Access value) {
+        if (playerAccessBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerAccessIsMutable();
+          playerAccess_.add(value);
+          onChanged();
+        } else {
+          playerAccessBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder addPlayerAccess(
+          int index, com.example.matchmaking.util.ConnectionProtos.Access value) {
+        if (playerAccessBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerAccessIsMutable();
+          playerAccess_.add(index, value);
+          onChanged();
+        } else {
+          playerAccessBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder addPlayerAccess(
+          com.example.matchmaking.util.ConnectionProtos.Access.Builder builderForValue) {
+        if (playerAccessBuilder_ == null) {
+          ensurePlayerAccessIsMutable();
+          playerAccess_.add(builderForValue.build());
+          onChanged();
+        } else {
+          playerAccessBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder addPlayerAccess(
+          int index, com.example.matchmaking.util.ConnectionProtos.Access.Builder builderForValue) {
+        if (playerAccessBuilder_ == null) {
+          ensurePlayerAccessIsMutable();
+          playerAccess_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          playerAccessBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder addAllPlayerAccess(
+          java.lang.Iterable<? extends com.example.matchmaking.util.ConnectionProtos.Access> values) {
+        if (playerAccessBuilder_ == null) {
+          ensurePlayerAccessIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, playerAccess_);
+          onChanged();
+        } else {
+          playerAccessBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder clearPlayerAccess() {
+        if (playerAccessBuilder_ == null) {
+          playerAccess_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          playerAccessBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public Builder removePlayerAccess(int index) {
+        if (playerAccessBuilder_ == null) {
+          ensurePlayerAccessIsMutable();
+          playerAccess_.remove(index);
+          onChanged();
+        } else {
+          playerAccessBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public com.example.matchmaking.util.ConnectionProtos.Access.Builder getPlayerAccessBuilder(
+          int index) {
+        return getPlayerAccessFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder getPlayerAccessOrBuilder(
+          int index) {
+        if (playerAccessBuilder_ == null) {
+          return playerAccess_.get(index);  } else {
+          return playerAccessBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public java.util.List<? extends com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> 
+           getPlayerAccessOrBuilderList() {
+        if (playerAccessBuilder_ != null) {
+          return playerAccessBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(playerAccess_);
+        }
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public com.example.matchmaking.util.ConnectionProtos.Access.Builder addPlayerAccessBuilder() {
+        return getPlayerAccessFieldBuilder().addBuilder(
+            com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public com.example.matchmaking.util.ConnectionProtos.Access.Builder addPlayerAccessBuilder(
+          int index) {
+        return getPlayerAccessFieldBuilder().addBuilder(
+            index, com.example.matchmaking.util.ConnectionProtos.Access.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Access player_access = 4;</code>
+       */
+      public java.util.List<com.example.matchmaking.util.ConnectionProtos.Access.Builder> 
+           getPlayerAccessBuilderList() {
+        return getPlayerAccessFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.matchmaking.util.ConnectionProtos.Access, com.example.matchmaking.util.ConnectionProtos.Access.Builder, com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder> 
+          getPlayerAccessFieldBuilder() {
+        if (playerAccessBuilder_ == null) {
+          playerAccessBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.example.matchmaking.util.ConnectionProtos.Access, com.example.matchmaking.util.ConnectionProtos.Access.Builder, com.example.matchmaking.util.ConnectionProtos.AccessOrBuilder>(
+                  playerAccess_,
+                  ((bitField0_ & 0x00000002) != 0),
+                  getParentForChildren(),
+                  isClean());
+          playerAccess_ = null;
+        }
+        return playerAccessBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4680,10 +5056,10 @@ public final class ConnectionProtos {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Player_Color_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ServerLocation_descriptor;
+    internal_static_Access_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ServerLocation_fieldAccessorTable;
+      internal_static_Access_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Request_descriptor;
   private static final 
@@ -4707,16 +5083,17 @@ public final class ConnectionProtos {
       "n\030\001 \001(\0132\020.Player.Position\022\034\n\005color\030\002 \001(\013" +
       "2\r.Player.Color\032 \n\010Position\022\t\n\001x\030\001 \001(\002\022\t" +
       "\n\001y\030\002 \001(\002\032(\n\005Color\022\t\n\001r\030\001 \001(\002\022\t\n\001g\030\002 \001(\002" +
-      "\022\t\n\001b\030\003 \001(\002\"/\n\016ServerLocation\022\017\n\007address" +
-      "\030\001 \001(\014\022\014\n\004port\030\002 \001(\r\"|\n\007Request\022\032\n\004type\030" +
-      "\001 \001(\0162\014.MessageType\022\027\n\006player\030\002 \001(\0132\007.Pl" +
-      "ayer\022\r\n\005token\030\003 \001(\014\022-\n\024game_server_locat" +
-      "ion\030\004 \001(\0132\017.ServerLocation\"Q\n\010Response\022\017" +
-      "\n\007success\030\001 \001(\010\022\032\n\004type\030\002 \001(\0162\014.MessageT" +
-      "ype\022\030\n\007players\030\003 \003(\0132\007.Player*D\n\013Message" +
-      "Type\022\t\n\005QUEUE\020\000\022\t\n\005MATCH\020\001\022\010\n\004JOIN\020\002\022\n\n\006" +
-      "UPDATE\020\003\022\t\n\005LEAVE\020\004B0\n\034com.example.match" +
-      "making.utilB\020ConnectionProtosb\006proto3"
+      "\022\t\n\001b\030\003 \001(\002\"6\n\006Access\022\017\n\007address\030\001 \001(\014\022\014" +
+      "\n\004port\030\002 \001(\r\022\r\n\005token\030\003 \001(\014\"W\n\007Request\022\032" +
+      "\n\004type\030\001 \001(\0162\014.MessageType\022\027\n\006player\030\002 \001" +
+      "(\0132\007.Player\022\027\n\006access\030\003 \001(\0132\007.Access\"q\n\010" +
+      "Response\022\017\n\007success\030\001 \001(\010\022\032\n\004type\030\002 \001(\0162" +
+      "\014.MessageType\022\030\n\007players\030\003 \003(\0132\007.Player\022" +
+      "\036\n\rplayer_access\030\004 \003(\0132\007.Access*W\n\013Messa" +
+      "geType\022\t\n\005QUEUE\020\000\022\t\n\005MATCH\020\001\022\010\n\004JOIN\020\002\022\n" +
+      "\n\006UPDATE\020\003\022\t\n\005LEAVE\020\004\022\021\n\rREGISTER_GAME\020\005" +
+      "B0\n\034com.example.matchmaking.utilB\020Connec" +
+      "tionProtosb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4740,24 +5117,24 @@ public final class ConnectionProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Player_Color_descriptor,
         new java.lang.String[] { "R", "G", "B", });
-    internal_static_ServerLocation_descriptor =
+    internal_static_Access_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_ServerLocation_fieldAccessorTable = new
+    internal_static_Access_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ServerLocation_descriptor,
-        new java.lang.String[] { "Address", "Port", });
+        internal_static_Access_descriptor,
+        new java.lang.String[] { "Address", "Port", "Token", });
     internal_static_Request_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Request_descriptor,
-        new java.lang.String[] { "Type", "Player", "Token", "GameServerLocation", });
+        new java.lang.String[] { "Type", "Player", "Access", });
     internal_static_Response_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Response_descriptor,
-        new java.lang.String[] { "Success", "Type", "Players", });
+        new java.lang.String[] { "Success", "Type", "Players", "PlayerAccess", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

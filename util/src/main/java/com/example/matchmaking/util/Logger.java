@@ -8,6 +8,11 @@ public class Logger {
 
     private final static ArrayList<String> lines = new ArrayList<>();
     private static String name = "";
+    private static boolean saved = false;
+
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(Logger::save));
+    }
 
     public static void logf(String format, Object... args) {
         log(String.format(format, args));
@@ -25,6 +30,8 @@ public class Logger {
     }
 
     public static void save() {
+        if(saved) return;
+        saved = true;
         try {
             FileWriter fileWriter = new FileWriter(String.format("%s_%d.txt", name, System.currentTimeMillis()));
             for(String line : lines) {

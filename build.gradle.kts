@@ -30,10 +30,10 @@ tasks.register("clear", type = Delete::class) {
 }
 
 tasks.register("move", type = Copy::class) {
-    from("client/build/libs", "matchmaker/build/libs")
+    from("client/build/libs", "matchmaker/build/libs", "gameserver/build/libs")
     into(workingDirectory)
-    dependsOn("client:build", "matchmaker:build")
-    mustRunAfter("client:build", "matchmaker:build")
+    dependsOn("client:build", "matchmaker:build", "gameserver:build")
+    mustRunAfter("client:build", "matchmaker:build", "gameserver:build")
 }
 
 tasks {

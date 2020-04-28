@@ -20,13 +20,13 @@ public class ClientQueue {
         }
     }
 
-    public ArrayList<ProtoSocket.Location> get(int n) {
+    public ArrayList<ProtoSocket.Location> get() {
         final ArrayList<ProtoSocket.Location> result = new ArrayList<>();
         synchronized (list) {
-            if(list.size() < n) {
+            if(list.size() < size) {
                 throw new IllegalStateException("queue does not have that many items");
             }
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < size; i++) {
                 result.add(list.remove(0));
             }
         }

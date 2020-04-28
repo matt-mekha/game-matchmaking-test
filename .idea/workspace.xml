@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="22749b17-0ba4-4157-b090-553ea9be3352" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameserver/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/com/example/matchmaking/gameserver/GameServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/com/example/matchmaking/gameserver/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/build.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/client.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/run.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/src/test/java/com/example/matchmaking/util/ProtoSocketTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/src/test/java/com/example/matchmaking/util/TokensTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Game Matchmaking 2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/mattm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/mattm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinScripting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/matchmaking/client/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/matchmaking/client/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea.bat" beforeDir="false" afterPath="$PROJECT_DIR$/idea.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matchmaker/src/main/java/com/example/matchmaking/matchmaker/ClientQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/matchmaker/src/main/java/com/example/matchmaking/matchmaker/ClientQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matchmaker/src/main/java/com/example/matchmaking/matchmaker/MatchmakingServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/matchmaker/src/main/java/com/example/matchmaking/matchmaker/MatchmakingServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/protos/connection.proto" beforeDir="false" afterPath="$PROJECT_DIR$/protos/connection.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/ConnectionProtos.java" beforeDir="false" afterPath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/ConnectionProtos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/ProtoSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/ProtoSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/Tokens.java" beforeDir="false" afterPath="$PROJECT_DIR$/util/src/main/java/com/example/matchmaking/util/Tokens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/src/test/java/com/example/matchmaking/util/ConstantsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/util/src/test/java/com/example/matchmaking/util/ConstantsTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1b9O0O0IKr9fHb0Fi5K5eKfRWMt" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/workingDirectory" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.matchmaking.gameserver" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Batch.Run">
+    <configuration name="Build" type="BatchConfigurationType" factoryName="Batch">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/build.bat" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run Heavy" type="BatchConfigurationType" factoryName="Batch">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/workingDirectory" />
+      <option name="PARENT_ENVS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/run.bat" />
+      <option name="PARAMETERS" value="15" />
+      <method v="2">
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="Build" run_configuration_type="BatchConfigurationType" />
+      </method>
+    </configuration>
+    <configuration name="Run" type="BatchConfigurationType" factoryName="Batch">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/workingDirectory" />
+      <option name="PARENT_ENVS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/run.bat" />
+      <option name="PARAMETERS" value="5" />
+      <method v="2">
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="Build" run_configuration_type="BatchConfigurationType" />
+      </method>
+    </configuration>
+    <configuration name="Proto" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="proto" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Test" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Batch.Build" />
+      <item itemvalue="Batch.Run" />
+      <item itemvalue="Batch.Run Heavy" />
+      <item itemvalue="Gradle.Test" />
+      <item itemvalue="Gradle.Proto" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="22749b17-0ba4-4157-b090-553ea9be3352" name="Default Changelist" comment="" />
+      <created>1588040618950</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588040618950</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588049582423">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588049582423" />
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1588043724967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588043724967" />
+    <state x="740" y="273" key="FileChooserDialogImpl" timestamp="1588048259712">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="273" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1588048259712" />
+    <state width="1876" height="277" key="GridCell.Tab.0.bottom" timestamp="1588050759964">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588050759964" />
+    <state width="1876" height="277" key="GridCell.Tab.0.center" timestamp="1588050759964">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588050759964" />
+    <state width="1876" height="277" key="GridCell.Tab.0.left" timestamp="1588050759964">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588050759964" />
+    <state width="1876" height="277" key="GridCell.Tab.0.right" timestamp="1588050759964">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588050759964" />
+    <state x="666" y="122" width="587" height="795" key="find.popup" timestamp="1588047664394">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="666" y="122" width="587" height="795" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588047664394" />
+  </component>
+</project>

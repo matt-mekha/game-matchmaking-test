@@ -95,17 +95,18 @@ public class ProtoSocket {
      * @param callback a Function that accepts a Request and returns a Response
      */
     public void listen(MessageType messageType, Function<ProtoPacket<Request>, Response> callback) {
-        listen(messageType, callback, () -> {}, -1);
+        listen(messageType, callback, null, -1);
     }
 
     /**
      * Listens for Request packets and calls the callback function to determine what to respond.
      * @param messageType the type of message
      * @param callback a function that accepts a Request and returns a Response
-     * @param onTimeOut a Runnable that runs if the listen times out
+     * @param onFinish a Consumer that accepts <code>true</code> if nothing was received and <code>false</code> if
+     *                 otherwise
      * @param timeout most milliseconds to wait for response
      */
-    public void listen(MessageType messageType, Function<ProtoPacket<Request>, Response> callback, Runnable onTimeOut, int timeout) {
+    public void listen(MessageType messageType, Function<ProtoPacket<Request>, Response> callback, Consumer<Boolean> onFinish, int timeout) {
         Logger.logf("listening for %s requests", messageType.toString());
 
         PacketResponder packetResponder = new PacketResponder(callback);
@@ -114,9 +115,7 @@ public class ProtoSocket {
             new Thread(() -> {
                 try {
                     Thread.sleep(timeout);
-                    if (packetResponder.isWaiting()) {
-                        onTimeOut.run();
-                    }
+                    onFinish.accept(packetResponder.isWaiting());
                 } catch (InterruptedException e) {
                     Logger.fatalException(e);
                 }
@@ -203,6 +202,7 @@ public class ProtoSocket {
                         Logger.logf("the %s response has no registered callback", responsePacket.getMessageType());
                     } else {
                         if (packetConsumer.getSentPacket().matches(responsePacket)) {
+                            assert responsePacket.getMessage().getSuccess();
                             packetConsumer.accept(responsePacket.getMessage());
                         } else {
                             Logger.logf("the %s response is from a different source - ignoring", responsePacket.getMessageType());
@@ -235,13 +235,20 @@ public class ProtoSocket {
             this.port = port;
         }
 
-        public Location(ServerLocation server) {
+        public Location(Access access) {
             try {
-                this.address = InetAddress.getByAddress(server.getAddress().toByteArray());
+                this.address = InetAddress.getByAddress(access.getAddress().toByteArray());
             } catch (UnknownHostException e) {
                 Logger.fatalException(e);
             }
-            this.port = server.getPort();
+            this.port = access.getPort();
+        }
+
+        public Access toProto() {
+            return Access.newBuilder()
+                    .setAddress(ByteString.copyFrom(address.getAddress()))
+                    .setPort(port)
+                    .buildPartial();
         }
 
         public InetAddress getAddress() {
