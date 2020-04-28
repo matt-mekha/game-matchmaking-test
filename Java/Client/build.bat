@@ -1,1 +1,0 @@
-gradle clean && gradle desktop:dist && cd desktop/build/libs && move desktop.jar Client.jar && cd ../../.. && gradle desktop:copy && exit
